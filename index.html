@@ -1,1 +1,412 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Цемент и фарфор на коже · презентация</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #2b2b26; /* тёмная основа, как старая кожа */
+      font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+    }
+
+    /* контейнер презентации — имитация кожаного планшета */
+    .presentation {
+      max-width: 1300px;
+      width: 100%;
+      background: #e9ddd0;   /* телесный / кожаный подтон */
+      background-image: radial-gradient(circle at 30% 40%, rgba(200, 170, 140, 0.3) 0%, transparent 35%),
+                        repeating-linear-gradient(45deg, rgba(150, 120, 90, 0.08) 0px, rgba(150, 120, 90, 0.08) 4px, transparent 4px, transparent 12px);
+      border-radius: 60px 30px 60px 30px;
+      box-shadow: 0 30px 50px rgba(0,0,0,0.6), inset 0 1px 8px rgba(255, 235, 210, 0.7);
+      padding: 2.8rem 2.5rem;
+      border: 12px solid #5e4c3b; /* грубая кожаная окантовка */
+      border-image: repeating-linear-gradient(45deg, #7a624b, #9c8264 15px, #5e4c3b 20px) 30 stretch;
+      position: relative;
+    }
+
+    /* декоративные "швы" по углам — отсылка к коже */
+    .presentation::before {
+      content: "⤫ ⤫ ⤫";
+      position: absolute;
+      top: -28px;
+      left: 40px;
+      font-size: 2rem;
+      color: #c9b294;
+      letter-spacing: 10px;
+      text-shadow: 0 2px 3px #3f3329;
+    }
+
+    .presentation::after {
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      width: 100px;
+      height: 60px;
+      background: radial-gradient(circle, rgba(255,240,215,0.3) 0%, transparent 70%);
+      filter: blur(15px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* каждый слайд — как лист пергамента, покрытый цементной пылью или фарфоровой глазурью */
+    .slide {
+      background: rgba(255, 245, 235, 0.7);
+      backdrop-filter: blur(3px);
+      border-radius: 48px 16px 48px 16px;
+      padding: 2.5rem 3rem;
+      margin-bottom: 2.8rem;
+      box-shadow: 0 15px 25px -12px rgba(60, 40, 20, 0.6),
+                  inset 0 0 0 2px rgba(255, 255, 240, 0.8),
+                  inset 0 0 15px #baa78d;
+      border: 1px solid #b79c7e;
+      transition: transform 0.2s;
+      position: relative;
+      z-index: 2;
+    }
+
+    .slide:hover {
+      transform: scale(1.01) translateY(-3px);
+      box-shadow: 0 22px 30px -10px #2f241b;
+    }
+
+    /* индивидуальный декор для цемента (грубый, серый) */
+    .cement-touch {
+      position: relative;
+      overflow: hidden;
+    }
+    .cement-touch::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.15"><circle cx="20" cy="20" r="8" fill="%23555"/><circle cx="70" cy="30" r="12" fill="%23333"/><circle cx="40" cy="80" r="6" fill="%236f6f6f"/><circle cx="85" cy="70" r="9" fill="%234a4a4a"/></svg>');
+      background-size: 180px 180px;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+      border-radius: 48px 16px 48px 16px;
+      z-index: 0;
+    }
+
+    /* фарфоровый декор — тонкие трещины, блеск */
+    .porcelain-touch {
+      position: relative;
+      background: rgba(255, 250, 245, 0.9);
+    }
+    .porcelain-touch::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.8) 0%, transparent 40%),
+                  repeating-linear-gradient(45deg, rgba(180, 210, 230, 0.1) 0px, rgba(180, 210, 230, 0.1) 12px, transparent 12px, transparent 24px);
+      border-radius: 48px 16px 48px 16px;
+      pointer-events: none;
+    }
+
+    /* типографика */
+    h1 {
+      font-size: 5rem;
+      font-weight: 800;
+      color: #3e2e1f;
+      text-shadow: 3px 3px 0 #cbb99f, 5px 5px 0 rgba(0,0,0,0.1);
+      letter-spacing: -0.02em;
+      margin: 0 0 0.25rem;
+      line-height: 1.0;
+    }
+
+    h2 {
+      font-size: 3.2rem;
+      font-weight: 600;
+      color: #413427;
+      border-bottom: 4px double #ae8e72;
+      padding-bottom: 0.4rem;
+      margin-bottom: 2rem;
+      display: inline-block;
+    }
+
+    h3 {
+      font-size: 2.2rem;
+      color: #5e4a36;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    p {
+      font-size: 1.4rem;
+      line-height: 1.6;
+      color: #2a241e;
+      font-weight: 350;
+      margin-bottom: 1.2rem;
+      max-width: 75ch;
+    }
+
+    /* сетки и карточки */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin: 2rem 0 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .card {
+      background: rgba(245, 235, 220, 0.8);
+      backdrop-filter: blur(2px);
+      border-radius: 36px 12px 36px 12px;
+      padding: 2rem 1.8rem;
+      border: 1px solid #d4bc9e;
+      box-shadow: inset 0 1px 5px #fff9ef, 0 12px 18px -15px #2d241c;
+    }
+
+    .card i {
+      font-size: 3rem;
+      color: #866b4f;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+
+    .badge {
+      background: #ab8e72;
+      color: #fcf2e4;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px 8px 40px 8px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      width: fit-content;
+      margin-bottom: 1rem;
+      border: 1px solid #e2cdb1;
+    }
+
+    /* цитаты, контакт с кожей */
+    .skin-quote {
+      background: #dccdb9;
+      border-radius: 200px 20px 200px 20px;
+      padding: 1.8rem 2.8rem;
+      color: #2d2419;
+      font-size: 1.7rem;
+      font-style: italic;
+      border: 2px dashed #7b6248;
+      margin: 2.5rem 0 1rem;
+      text-align: center;
+    }
+
+    /* иллюстративные блоки (имитация изображений) */
+    .fig {
+      width: 100%;
+      height: 180px;
+      background: linear-gradient(145deg, #b7a287, #8f765b);
+      border-radius: 36px 12px 36px 12px;
+      margin: 1.5rem 0 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: rgba(255, 240, 210, 0.8);
+      font-weight: 600;
+      box-shadow: inset 0 -5px 10px #5d4b36, 0 10px 10px -5px #3d3228;
+      border: 2px solid #eacfb2;
+    }
+
+    /* фарфоровая текстура */
+    .porcelain-fig {
+      background: linear-gradient(125deg, #e8dfd1, #cfc1ae);
+      position: relative;
+      overflow: hidden;
+    }
+    .porcelain-fig::after {
+      content: "🍶";
+      font-size: 4rem;
+      opacity: 0.4;
+    }
+
+    .cement-fig {
+      background: linear-gradient(125deg, #797063, #5b5346);
+    }
+    .cement-fig::after {
+      content: "🧱";
+      font-size: 4rem;
+      opacity: 0.5;
+      color: #d7cec0;
+    }
+
+    /* контактные метки */
+    .label-skin {
+      background: #f2e1cf;
+      padding: 0.4rem 1.8rem;
+      border-radius: 30px 8px 30px 8px;
+      font-weight: 600;
+      color: #4a3f33;
+      border: 1px solid #bb9e81;
+    }
+
+    hr {
+      border: none;
+      height: 3px;
+      background: linear-gradient(90deg, #cdb69b, #af8f70, #cdb69b);
+      margin: 2rem 0;
+    }
+
+    /* адаптация */
+    @media (max-width: 900px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      h1 { font-size: 3.5rem; }
+      .presentation { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="presentation">
+
+  <!-- СЛАЙД 1: ТИТУЛЬНЫЙ - КОЖА -->
+  <div class="slide">
+    <div class="badge">🏷️ осязание материалов</div>
+    <h1>ЦЕМЕНТ <span style="color:#6a5a4b;">&</span> ФАРФОР</h1>
+    <h2 style="font-size: 2.8rem; border-bottom: none;">на коже</h2>
+    <div class="skin-quote">
+      «Тактильная поэзия индустриального и благородного»
+    </div>
+    <div class="grid-2" style="margin-top: 1rem;">
+      <div class="card cement-touch">
+        <i>🧪</i>
+        <h4 style="font-size: 1.8rem;">Цемент</h4>
+        <p>Пыльный, шероховатый, холодный — он оставляет серый след, въедается в поры.</p>
+      </div>
+      <div class="card porcelain-touch">
+        <i>🏺</i>
+        <h4 style="font-size: 1.8rem;">Фарфор</h4>
+        <p>Гладкий, как лед, звонкий и почти живой — кожа чувствует его прохладу и невесомость.</p>
+      </div>
+    </div>
+    <div class="fig cement-fig" style="height: 80px; font-size: 1.2rem; background: #9b8b78;">шероховатость цемента</div>
+  </div>
+
+  <!-- СЛАЙД 2: ЦЕМЕНТ И КОЖА -->
+  <div class="slide cement-touch">
+    <h3><span style="background: #857a6b; color: white; padding: 0.3rem 1.5rem; border-radius: 40px 8px;">01</span> Цементная пыль на коже</h3>
+    <div class="grid-2">
+      <div>
+        <p><strong>Тактильные ощущения:</strong> сухость, стягивание, лёгкое покалывание. Мельчайшие частицы связующего проникают в микротрещины, подчеркивая рельеф.</p>
+        <p>Цемент «рисует» на коже серые узоры — <em>временная татуировка строителя</em>. Он абсорбирует влагу, делая кожу матовой и шершавой.</p>
+        <div class="label-skin">👆 после контакта — ощущение песка</div>
+      </div>
+      <div class="fig cement-fig" style="height: 180px;">цемент + эпидермис</div>
+    </div>
+    <hr>
+    <p style="font-size: 1.2rem; color: #564b3f;">🏭 Реакция: слабощелочная среда цемента может вызвать сухость, поэтому строители пользуются защитными кремами.</p>
+  </div>
+
+  <!-- СЛАЙД 3: ФАРФОР И КОЖА -->
+  <div class="slide porcelain-touch">
+    <h3><span style="background: #bc9f85; color: white; padding: 0.3rem 1.5rem; border-radius: 40px 8px;">02</span> Фарфоровая глазурь против кожи</h3>
+    <div class="grid-2">
+      <div>
+        <p><strong>Прикосновение:</strong> ледяная гладкость, почти зеркальная. Кожа скользит, не встречая сопротивления. Фарфор кажется тёплым только спустя несколько секунд.</p>
+        <p>Тончайший слой глазури не имеет пор — он «стерилен» на ощупь. Кожа рядом с фарфором кажется живой, бархатистой, контрастной.</p>
+        <div class="label-skin">🤍 оставляет ощущение прохлады</div>
+      </div>
+      <div class="fig porcelain-fig" style="height: 180px;">фарфоровая ваза</div>
+    </div>
+    <hr>
+    <p style="font-size: 1.2rem;">🍶 Фарфор не впитывает влагу, не пачкает кожу — остаётся вечно холодным аристократом.</p>
+  </div>
+
+  <!-- СЛАЙД 4: ДИАЛОГ МАТЕРИАЛОВ НА КОЖЕ -->
+  <div class="slide">
+    <h3><i class="fas fa-hand-back-fist" style="color:#8e6f53;"></i> Одновременный контакт</h3>
+    <div class="grid-3">
+      <div class="card cement-touch" style="text-align: center;">
+        <div style="font-size: 3rem;">🧱</div>
+        <h4>Цемент</h4>
+        <p>Матовый, серый, тёплый от руки, но быстро остывает.</p>
+      </div>
+      <div class="card" style="background: #e6dac8; text-align: center;">
+        <div style="font-size: 3rem;">🖐️</div>
+        <h4>Кожа</h4>
+        <p>Принимает отпечатки, нагревается, выделяет влагу.</p>
+      </div>
+      <div class="card porcelain-touch" style="text-align: center;">
+        <div style="font-size: 3rem;">🍶</div>
+        <h4>Фарфор</h4>
+        <p>Прозрачный холод, скольжение, звон.</p>
+      </div>
+    </div>
+    <div class="skin-quote" style="font-size: 1.5rem;">
+      Кожа — идеальный посредник: она чувствует разницу между грубой минеральной крошкой и отполированным черепком.
+    </div>
+  </div>
+
+  <!-- СЛАЙД 5: ТЕКСТУРЫ КРУПНЫМ ПЛАНОМ (тактильные карточки) -->
+  <div class="slide">
+    <h3>🔍 Тактильные исследования</h3>
+    <div class="grid-2">
+      <div style="background: #cbc1b2; border-radius: 48px 16px; padding: 2rem;">
+        <span style="font-weight: 700; font-size: 2rem;">• • •</span>
+        <p style="font-weight: 400;">Цемент оспой — мелкие зёрна оставляют временный рельеф на подушечках пальцев. Кожа как бы запоминает шероховатость.</p>
+        <div style="width: 100%; height: 4px; background: #5c4f41; margin: 1rem 0;"></div>
+        <span>🏗️ чем тоньше помол, тем неожиданнее нежность цемента</span>
+      </div>
+      <div style="background: #e5dbcf; border-radius: 48px 16px; padding: 2rem;">
+        <span style="font-weight: 700; font-size: 2rem;">◈ ◈ ◈</span>
+        <p style="font-weight: 400;">Фарфоровая поверхность без микрорельефа — абсолютная гладкость. Кожа пытается «прилипнуть», но проскальзывает.</p>
+        <div style="width: 100%; height: 4px; background: #aa9a88; margin: 1rem 0;"></div>
+        <span>🍶 эффект холодного зеркала</span>
+      </div>
+    </div>
+    <div style="background: #f2e4d6; border-radius: 30px; padding: 1.5rem; margin-top: 2rem; border-left: 15px solid #ad8e72;">
+      <p style="margin: 0;"><strong>⚡️ Эксперимент:</strong> проведите цементным камнем по тыльной стороне ладони — появится серая полоса, исчезающая после мытья. Фарфор не оставляет следа, только ощущение.</p>
+    </div>
+  </div>
+
+  <!-- СЛАЙД 6: ЗАКЛЮЧИТЕЛЬНЫЙ — МЕТАФОРА -->
+  <div class="slide">
+    <h3 style="justify-content: center;">〰️ кожа как холст 〰️</h3>
+    <div style="display: flex; gap: 1.8rem; flex-wrap: wrap; justify-content: center;">
+      <span class="badge" style="font-size: 1.6rem;">цемент — грубая правда</span>
+      <span class="badge" style="background: #d0bea8; font-size: 1.6rem;">фарфор — хрупкая мечта</span>
+    </div>
+    <div class="fig" style="background: linear-gradient(90deg, #7f6e5b, #d2c2b0, #b0a191); height: 100px; margin: 2rem 0; display: flex; gap: 0; padding: 0;">
+      <div style="flex:1; background: #958a7a; display: flex; align-items: center; justify-content: center;">🧱</div>
+      <div style="flex:1; background: #dccfc1; display: flex; align-items: center; justify-content: center;">🖐️</div>
+      <div style="flex:1; background: #eee7dd; display: flex; align-items: center; justify-content: center;">🍶</div>
+    </div>
+    <p style="text-align: center; font-size: 1.6rem; font-style: italic;">«Кожа помнит прикосновение цемента и фарфора — память, которую не смыть водой»</p>
+    <div style="margin-top: 2rem; display: flex; justify-content: flex-end; color: #755e48;">
+      <span>✸ презентация: осязание материалов ✸</span>
+    </div>
+  </div>
+
+  <!-- последний штрих — отпечаток пальца в углу (декор) -->
+  <div style="position: absolute; bottom: 10px; left: 30px; font-size: 3rem; opacity: 0.2; transform: rotate(-15deg);">👆</div>
+</div>
+
+<!-- дополнительный текст описания (вне презентации, как подпись) -->
+<div style="margin-top: 1.5rem; color: #c2b6a7; text-align: center; max-width: 900px;">
+  <p style="font-size: 1rem; letter-spacing: 0.5px;">Цемент и фарфор на коже — исследование контрастов: грубого и гладкого, тёплого и холодного, временного и вечного.</p>
+</div>
+</body>
+</html>
